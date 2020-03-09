@@ -106,9 +106,9 @@ public class TicTacToe {
                 // Win conditions
                 // Horizontal Wins
                 for (int i = 0; i < 3; i++) {
-                    if (grid[0 + i].equalsIgnoreCase(player)) {
-                        if (grid[1 + i].equalsIgnoreCase(player)) {
-                            if (grid[2 + i].equalsIgnoreCase(player)) {
+                    if (grid[0 + (i*3)].equalsIgnoreCase(player)) {
+                        if (grid[1 + (i*3)].equalsIgnoreCase(player)) {
+                            if (grid[2 + (i*3)].equalsIgnoreCase(player)) {
                                 System.out.println("Congratulations, you Win!!!");
                                 System.out.println("Do you want to play again?");
                                 String winner = new Scanner(System.in).nextLine();
@@ -192,9 +192,9 @@ public class TicTacToe {
 
                 // Horizontal loss
                 for (int i = 0; i < 3; i++) {
-                    if (grid[0 + i].equalsIgnoreCase(computer)) {
-                        if (grid[1 + i].equalsIgnoreCase(computer)) {
-                            if (grid[2 + i].equalsIgnoreCase(computer)) {
+                    if (grid[0 + (i*3)].equalsIgnoreCase(computer)) {
+                        if (grid[1 + (i*3)].equalsIgnoreCase(computer)) {
+                            if (grid[2 + (i*3)].equalsIgnoreCase(computer)) {
                                 System.out.println("The computer has beaten you! You lose.");
                                 System.out.println("Do you want to play again?");
                                 String winner = new Scanner(System.in).nextLine();
@@ -275,10 +275,10 @@ public class TicTacToe {
 
 
                 //Tie conditions
-                if (end != 2) {
+                if (end == 2) {
                     int tie = 0;
                     for (int i = 0; i < grid.length; i++) {
-                        if (!grid[i].equalsIgnoreCase(String.valueOf(i))) {
+                        if (!grid[i].equalsIgnoreCase(String.valueOf(i+1))) {
                             tie++;
                         }
                     }
