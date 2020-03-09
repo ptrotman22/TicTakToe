@@ -24,7 +24,8 @@ public class TicTacToe {
         String player = "X";
         String computer = "O";
         // end game variable
-        int end = 0;
+        int end = 2;
+
         do {
             // check to end while loop
             int check = 1;
@@ -53,7 +54,11 @@ public class TicTacToe {
 
             System.out.println("The computer will go first.");
 
-            while(check == 1){
+            for (int i = 0; i < grid.length; i++){
+                grid[i] = String.valueOf((i+1));
+            }
+
+            while(check == 1) {
                 int spotInt = random.nextInt(9);
                 grid[spotInt] = computer;
 
@@ -68,12 +73,12 @@ public class TicTacToe {
                     }
                 }
 
-                System.out.println(grid[0]+" | "+grid[1]+ "| " +grid[2]+"\n" +
+                System.out.println(grid[0] + " | " + grid[1] + "| " + grid[2] + "\n" +
                         "\n" +
                         "--------------\n" +
-                        grid[3]+" | "+grid[4]+ "| " +grid[5]+"\n" +
+                        grid[3] + " | " + grid[4] + "| " + grid[5] + "\n" +
                         "--------------\n" +
-                        grid[6]+" | "+grid[7]+ "| " +grid[8]+"\n");
+                        grid[6] + " | " + grid[7] + "| " + grid[8] + "\n");
 
                 System.out.println("What is your next move? (1-9)");
                 String again = new Scanner(System.in).nextLine(); // clear buffer for scanner.
@@ -81,41 +86,39 @@ public class TicTacToe {
                 // Check if answer is filled already
                 boolean filled = false;
                 do {
-                    if (grid[Integer.parseInt(again)-1].equalsIgnoreCase(computer)) {
+                    if (grid[Integer.parseInt(again) - 1].equalsIgnoreCase(computer)) {
                         System.out.println("The computer has chosen this space already.");
                         System.out.println("Please Choose again.");
                         again = new Scanner(System.in).nextLine();
-                    } else if (grid[Integer.parseInt(again)-1].equalsIgnoreCase(player)) {
+                    } else if (grid[Integer.parseInt(again) - 1].equalsIgnoreCase(player)) {
                         System.out.println("You have chosen this space already.");
                         System.out.println("Please Choose again.");
                         again = new Scanner(System.in).nextLine();
-                    }
-                    else if (!grid[Integer.parseInt(again)-1].equalsIgnoreCase(player)) {
+                    } else if (!grid[Integer.parseInt(again) - 1].equalsIgnoreCase(player)) {
                         grid[(Integer.parseInt(again) - 1)] = player;
                         filled = true;
                     }
-                }while (filled == false);
+                } while (filled == false);
 
 
                 //grid[(Integer.parseInt(again)-1)] = player;
 
                 // Win conditions
                 // Horizontal Wins
-                for (int i = 0; i < 3; i++){
-                    if (grid[0+i].equalsIgnoreCase(player)){
-                        if (grid[1+i].equalsIgnoreCase(player)){
-                            if (grid[2+i].equalsIgnoreCase(player)){
+                for (int i = 0; i < 3; i++) {
+                    if (grid[0 + i].equalsIgnoreCase(player)) {
+                        if (grid[1 + i].equalsIgnoreCase(player)) {
+                            if (grid[2 + i].equalsIgnoreCase(player)) {
                                 System.out.println("Congratulations, you Win!!!");
                                 System.out.println("Do you want to play again?");
                                 String winner = new Scanner(System.in).nextLine();
-                                if (winner.equalsIgnoreCase("n")){
-                                end = 1;
-                                check = 0;
-                                break;
-                                }
-                                else{
-                                check = 0;
-                                break;
+                                if (winner.equalsIgnoreCase("n")) {
+                                    end = 1;
+                                    check = 0;
+                                    break;
+                                } else {
+                                    check = 0;
+                                    break;
                                 }
                             }
                         }
@@ -188,19 +191,18 @@ public class TicTacToe {
                 //Lose Conditions
 
                 // Horizontal loss
-                for (int i = 0; i < 3; i++){
-                    if (grid[0+i].equalsIgnoreCase(computer)){
-                        if (grid[1+i].equalsIgnoreCase(computer)){
-                            if (grid[2+i].equalsIgnoreCase(computer)){
+                for (int i = 0; i < 3; i++) {
+                    if (grid[0 + i].equalsIgnoreCase(computer)) {
+                        if (grid[1 + i].equalsIgnoreCase(computer)) {
+                            if (grid[2 + i].equalsIgnoreCase(computer)) {
                                 System.out.println("The computer has beaten you! You lose.");
                                 System.out.println("Do you want to play again?");
                                 String winner = new Scanner(System.in).nextLine();
-                                if (winner.equalsIgnoreCase("n")){
+                                if (winner.equalsIgnoreCase("n")) {
                                     end = 1;
                                     check = 0;
                                     break;
-                                }
-                                else{
+                                } else {
                                     check = 0;
                                     break;
                                 }
@@ -271,31 +273,34 @@ public class TicTacToe {
                     }
                 }
 
-            }
 
-            //Tie conditions
-            int tie = 0;
-            for (int i = 0; i < grid.length; i++){
-                if (!grid[i].equalsIgnoreCase(String.valueOf(i))){
-                    tie++;
+                //Tie conditions
+                if (end != 2) {
+                    int tie = 0;
+                    for (int i = 0; i < grid.length; i++) {
+                        if (!grid[i].equalsIgnoreCase(String.valueOf(i))) {
+                            tie++;
+                        }
+                    }
+
+                    if (tie == grid.length) {
+                        System.out.println("The game is a tie!");
+                        System.out.println("Do you want to play again?");
+                        String winner = new Scanner(System.in).nextLine();
+                        if (winner.equalsIgnoreCase("n")) {
+                            end = 1;
+                            check = 0;
+                            break;
+                        } else {
+                            check = 0;
+                            break;
+                        }
+                    }
                 }
+
             }
 
-            if (tie == grid.length){
-                System.out.println("The game is a tie!");
-                System.out.println("Do you want to play again?");
-                String winner = new Scanner(System.in).nextLine();
-                if (winner.equalsIgnoreCase("n")) {
-                    end = 1;
-                    check = 0;
-                    break;
-                } else {
-                    check = 0;
-                    break;
-                }
-            }
-
-        }while (end == 1);
+        }while (end == 2);
 
         System.out.println("Thank you for playing!!!");
 
